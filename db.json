@@ -1,0 +1,27 @@
+{
+  "regular_user": [
+    {
+      "id": 1,
+      "fname": "Kamena",
+      "lname": "Dacheva",
+      "username": "kamena",
+      "password": "123456",
+      "email": "kamena.dacheva@gmail.com"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "cat_name": "Desserts",
+      "cat_slug": "desserts"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "cat_name": "Chocolate cake",
+      "cat_slug": "chocolate-cake",
+      "price": 5
+    }
+  ]
+}
