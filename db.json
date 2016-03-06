@@ -19,8 +19,8 @@
   "products": [
     {
       "id": 1,
-      "cat_name": "Chocolate cake",
-      "cat_slug": "chocolate-cake",
+      "product_name": "Chocolate cake",
+      "product_slug": "chocolate-cake",
       "price": 5
     }
   ]
