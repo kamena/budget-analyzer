@@ -1,5 +1,5 @@
 {
-  "regular_user": [
+  "users": [
     {
       "id": 1,
       "fname": "Kamena",
@@ -7,6 +7,14 @@
       "username": "kamena",
       "password": "123456",
       "email": "kamena.dacheva@gmail.com"
+    },
+    {
+      "fname": "Ivan",
+      "lname": "Ivanov",
+      "email": "ivan.ivanov@gmail.com",
+      "username": "ivan",
+      "password": 123456,
+      "id": 2
     }
   ],
   "categories": [
@@ -19,8 +27,8 @@
   "products": [
     {
       "id": 1,
-      "product_name": "Chocolate cake",
-      "product_slug": "chocolate-cake",
+      "cat_name": "Chocolate cake",
+      "cat_slug": "chocolate-cake",
       "price": 5
     }
   ]
