@@ -1,18 +1,18 @@
 {
   "users": [
     {
-      "id": 1,
-      "fname": "Kamena",
-      "lname": "Dacheva",
-      "username": "kamena",
-      "password": "123456",
-      "email": "kamena.dacheva@gmail.com"
-    },
-    {
       "fname": "Ivan",
       "lname": "Ivanov",
       "email": "ivan.ivanov@gmail.com",
       "username": "ivan",
+      "password": 123456,
+      "id": 1
+    },
+    {
+      "fname": "Kamena",
+      "lname": "Dacheva",
+      "email": "kamena.dacheva@gmail.com",
+      "username": "kamena",
       "password": 123456,
       "id": 2
     }

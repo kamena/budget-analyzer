@@ -16,6 +16,7 @@
 
     <!-- Custom CSS -->
     <link href="libs/freelancer.css" rel="stylesheet">
+    <link href="libs/style.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -51,8 +52,23 @@
                     <li class="page-scroll">
                         <a href="#about">About</a>
                     </li>
-                    <li class="page-scroll">
-                        <a href="#contact">Contact</a>
+                    <li class="page-scroll" id="profile-dropdown">
+                        <ul class="nav navbar-nav">
+					        <li class="dropdown">
+					            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><div id="logged-username"></div><span class="glyphicon glyphicon-user pull-right"></a></span>
+					            <ul class="dropdown-menu">
+						            <li><a href="#">Account Settings <span class="glyphicon glyphicon-cog pull-right"></span></a></li>
+						            <li class="divider"></li>
+						            <li><a href="#">User stats <span class="glyphicon glyphicon-stats pull-right"></span></a></li>
+						            <li class="divider"></li>
+						            <li><a href="#">Messages <span class="badge pull-right"> 42 </span></a></li>
+						            <li class="divider"></li>
+						            <li><a href="#">Saved money<span class="glyphicon glyphicon-heart pull-right"></span></a></li>
+						            <li class="divider"></li>
+						            <li><a href="#" id="log-out" >Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a></li>
+						        </ul>
+					        </li>
+					   </ul>
                     </li>
                 </ul>
             </div>

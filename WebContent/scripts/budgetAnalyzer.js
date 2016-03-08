@@ -33,10 +33,48 @@ $(document).ready(function(){
 			return true;
 	}
 
-	function loggedUser(responce){
+	function loggedUser(value){
 		$("#login-form").hide();
 		$("#register-form").hide();
 		$("#portfolio").show();
+		$("#profile-dropdown").show();
+//		console.log(responce);
+//		$("#logged-username").text(responce[0].fname);
+		_url = ENDPOINT+"users"+"?id="+value;
+		var createPromise = $.ajax({
+			url: _url,
+			method: "GET",
+			dataType: "JSON"
+		}).then(function(responce){
+			if (responce != ""){
+				$("#logged-username").text(responce[0].fname);
+			} else {
+				console.log(responce);
+			}
+		});
+//		userId = responce[0].id;
+//		console.log("UserID: " + userID);
+	}
+	
+	function ReadCookie() {
+       var allcookies = document.cookie;
+       // Get all the cookies pairs in an array
+       cookiearray = allcookies.split(';');
+       cookiearray = allcookies.split(' ');
+       // Now take key value pair out of this array
+       for(var i = 0; i < cookiearray.length; i++){
+          name = cookiearray[i].split('=')[0];
+          value = cookiearray[i].split('=')[1];
+          if( name == "moneyLogged" ) {
+      		loggedUser(value);
+          }
+       }
+    }
+	
+	function logOut(){
+		document.cookie = "moneyLogged=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+		location.reload();
+		$("#profile-dropdown").hide();
 	}
 
 	function isUsernameTaken(){
@@ -94,12 +132,22 @@ $(document).ready(function(){
 			if (responce == ""){
 				alert("Wrong username or password!");
 			} else {
-				loggedUser(responce);
+				console.log(responce);
+				userID = responce[0].id;
+				document.cookie="moneyLogged="+userID;
+				loggedUser(userID);
 			}
 		});
 	}
 
 	function attachHandlers(){
+		
+		$("#profile-dropdown").hide();
+		
+		$( document ).ready(function() {
+			ReadCookie();
+		});
+		
 		$("#portfolio").hide();
 		$("#register-form").hide();
 		$("#register").on("click", function(){
@@ -113,6 +161,10 @@ $(document).ready(function(){
 			if ( isEmptyLogin() ) {
 				loginUser();
 			}
+		});
+		
+		$("#log-out").on("click", function(){
+			logOut();
 		});
 		
 		$("#show-login-form").on("click", function(){
