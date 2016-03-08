@@ -39,18 +39,15 @@ $(document).ready(function(){
 		$("#portfolio").show();
 		$("#profile-dropdown").show();
 //		console.log(responce);
-//		$("#logged-username").text(responce[0].fname);
 		_url = ENDPOINT+"users"+"?id="+value;
+		console.log(_url);
 		var createPromise = $.ajax({
 			url: _url,
 			method: "GET",
 			dataType: "JSON"
 		}).then(function(responce){
-			if (responce != ""){
-				$("#logged-username").text(responce[0].fname);
-			} else {
-				console.log(responce);
-			}
+			console.log(responce[0].fname);
+			$("#logged-username").text(responce[0].fname);
 		});
 //		userId = responce[0].id;
 //		console.log("UserID: " + userID);
@@ -64,9 +61,11 @@ $(document).ready(function(){
        // Now take key value pair out of this array
        for(var i = 0; i < cookiearray.length; i++){
           name = cookiearray[i].split('=')[0];
-          value = cookiearray[i].split('=')[1];
           if( name == "moneyLogged" ) {
-      		loggedUser(value);
+        	  value = cookiearray[i].split('=')[1];
+        	  value = value.split(';')[0];
+        	  console.log("Cookie value: " + value);
+        	  loggedUser(value);
           }
        }
     }
