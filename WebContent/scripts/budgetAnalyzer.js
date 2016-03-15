@@ -94,6 +94,8 @@ $(document).ready(function(){
 	}
 	
 	function registerUser(){
+		$("#register-form").hide();
+		$("#login-form").show();
 		var fname = $("#fname").val();
 		var lname = $("#lname").val();
 		var email = $("#email").val();
@@ -150,7 +152,6 @@ $(document).ready(function(){
 		$("#portfolio").hide();
 		$("#register-form").hide();
 		$("#register").on("click", function(){
-			$("#register-form").hide();
 			if ( isEmptyRegister() ){
 				isUsernameTaken();
 			}

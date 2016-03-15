@@ -15,6 +15,30 @@
       "username": "kamena",
       "password": 123456,
       "id": 2
+    },
+    {
+      "fname": "test",
+      "lname": "test",
+      "email": "test@gmail.com",
+      "username": "test",
+      "password": 123456,
+      "id": 3
+    },
+    {
+      "fname": "test",
+      "lname": "test",
+      "email": "test",
+      "username": "test-1",
+      "password": 123456,
+      "id": 4
+    },
+    {
+      "fname": "test",
+      "lname": 3,
+      "email": "test_3",
+      "username": "test-3",
+      "password": 123456,
+      "id": 5
     }
   ],
   "categories": [
