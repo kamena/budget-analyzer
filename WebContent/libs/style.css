@@ -35,3 +35,7 @@
 .dropdown-toggle span {
 	padding-left: 10px;
 }
+
+.jscolor, .jscolor-active {
+	z-index: 999999999!important;
+}

@@ -141,8 +141,7 @@ $(document).ready(function(){
 		});
 	}
 
-	function attachHandlers(){
-		
+	function attachHandlers(){		
 		$("#profile-dropdown").hide();
 		
 		$( document ).ready(function() {
