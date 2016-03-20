@@ -46,6 +46,23 @@
       "id": 1,
       "cat_name": "Desserts",
       "cat_slug": "desserts"
+    },
+    {
+      "cat_name": "Beer",
+      "icon_num": 4,
+      "user_id": 2,
+      "id": 2
+    },
+    {
+      "cat_name": "",
+      "user_id": 3,
+      "id": 3
+    },
+    {
+      "cat_name": "Chocolate",
+      "icon_num": 7,
+      "user_id": 3,
+      "id": 4
     }
   ],
   "products": [

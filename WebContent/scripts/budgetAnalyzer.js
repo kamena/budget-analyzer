@@ -66,6 +66,8 @@ $(document).ready(function(){
         	  value = value.split(';')[0];
         	  console.log("Cookie value: " + value);
         	  loggedUser(value);
+        	  
+        	  return value;
           }
        }
     }
@@ -109,6 +111,28 @@ $(document).ready(function(){
 			"password": pass,
 		}
 		_url = ENDPOINT + "users";
+		var createPromise = $.ajax({
+			url: _url,
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(data),
+			dataType: "json"
+		}).then(function(responce){
+			console.log(responce);
+		});
+	}
+	
+	function saveCategory(user_id) {
+		var cat_name = $("#category").val();
+		var icon_num = $(".chosen-icon .icon").attr( "id" );
+		var user_id = ReadCookie();
+		console.log(user_id);
+		data = {
+			"cat_name": cat_name,
+			"icon_num": icon_num,
+			"user_id": user_id,
+		}
+		_url = ENDPOINT + "categories";
 		var createPromise = $.ajax({
 			url: _url,
 			method: "POST",
@@ -175,6 +199,27 @@ $(document).ready(function(){
 			$("#login-form").hide();
 			$("#register-form").show();
 		});
+		
+		
+		for (i = 1; i <= 46; i++) {
+			icon = '<div class="col-xs-1">\
+		    	<img id="'+i+'" src="img/categories/icon-'+i+'.png" class="img-responsive img-centered icon" alt="" >\
+		    </div>';	
+			$( ".icons" ).append(icon);
+		}
+		
+		$(".icon").on("click", function(){
+			iconNum = $(this).attr( "id" );
+			icon = '<div class="col-xs-3">\
+		    	<img id="'+iconNum+'" src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered icon" alt="" >\
+		    </div>';
+			$(".chosen-icon").html(icon);
+		});
+		
+		$("#saveCat").on("click", function(){
+			saveCategory();
+		});
+		
 	}
 
 	attachHandlers();

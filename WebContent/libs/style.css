@@ -39,3 +39,19 @@
 .jscolor, .jscolor-active {
 	z-index: 999999999!important;
 }
+
+.icons .icon {
+	cursor: pointer;
+}
+
+.category {
+  background-color: #1fa4b6;
+  width: 360px;
+  height: 260px;
+}
+
+
+.category img {
+  width: 512px;
+  height: 512px;
+}

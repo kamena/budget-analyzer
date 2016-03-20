@@ -92,7 +92,6 @@
             </div>
         </div>
     </header>
-Color: <input class="jscolor" value="ba4c63">
     <!-- Register Section -->
     <section id="register-form">
         <div class="container">
@@ -225,16 +224,6 @@ Color: <input class="jscolor" value="ba4c63">
                     <hr class="star-primary">
                 </div>
             </div>
-                                        <input type="text" class="form-control" id="smallhsv" value="#2FB6FF">
-							<script>
-							$("input#smallhsv").ColorPickerSliders({
-							    size: 'sm',
-							    placement: 'right',
-							    swatches: false,
-							    sliders: false,
-							    hsvpanel: true
-							  });
-							</script>
             <div class="row">
                 <div class="col-sm-4 portfolio-item">
                     <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
@@ -244,26 +233,19 @@ Color: <input class="jscolor" value="ba4c63">
                                 <!-- <i class="fa fa-search-plus fa-3x"></i> -->
                             </div>
                         </div>
-                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
+                        <img src="img/portfolio/add.png" class="img-responsive" alt="">
                     </a>
                 </div>
-                <div class="input-group demo2">
-    <input type="text" value="" class="form-control" />
-    <span class="input-group-addon"><i></i></span>
-</div>
-<script>
-    $(function(){
-        $('.demo2').colorpicker();
-    });
-</script>
                 <div class="col-sm-4 portfolio-item">
                     <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
+                                <h1>Category</h1>
                             </div>
                         </div>
-                        <img src="img/portfolio/cake.png" class="img-responsive" alt="">
+                        <div class="category">
+                        <img src="img/categories/icon-4.png" class="img-responsive img-centered icon" alt="" />
+                        </div>
                     </a>
                 </div>
                 <div class="col-sm-4 portfolio-item">
@@ -398,56 +380,28 @@ Color: <input class="jscolor" value="ba4c63">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
                             <h2>Add category</h2>
-                            Color: <input class="jscolor" value="ba4c63">
                             <hr class="star-primary">
                             <!-- <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt=""> -->
                             <div class="col-lg-8 col-lg-offset-2">
 		                	<div class="row control-group">
 							    <div class="form-group col-xs-12 floating-label-form-group controls">
+							        
 							        <label>Category name</label>
+							        <span class="chosen-icon"></span>
 							        <input type="text" class="form-control" placeholder="Category name" id="category" required data-validation-required-message="Please enter your name.">
 							        <p class="help-block text-danger"></p>
 							    </div>
 							</div>
 							<br>
-							<div class="col-lg-12">
-			                <h1 class="page-header">Categories Gallery</h1>
-				            </div>
-				            <div class="col-lg-3 col-md-4 col-xs-6">
-				                <a href="#">
-				                    <img src="img/categories/icon-1.png" class="img-responsive img-centered" alt="" >
-				                </a>
-				            </div>
-				            <div class="col-lg-3 col-md-4 col-xs-6 taxon">
-				                <a href="#">
-				                    <img src="img/categories/icon-2.png" class="img-responsive img-centered" alt="" >
-				                </a>
-				            </div>
-				            <div class="col-lg-3 col-md-4 col-xs-6 taxon">
-				                <a href="#">
-				                    <img src="img/categories/icon-3.png" class="img-responsive img-centered" alt="" >
-				                </a>
-				            </div>
-				            <div class="col-lg-3 col-md-4 col-xs-6 taxon">
-				                <a href="#">
-				                    <img src="img/categories/icon-4.png" class="img-responsive img-centered" alt="" >
-				                </a>
-				            </div>
-				            <div class="col-lg-3 col-md-4 col-xs-6 taxon">
-				                <a href="#">
-				                    <img src="img/categories/icon-5.png" class="img-responsive img-centered" alt="" >
-				                </a>
-				            </div>
-				            <div class="col-lg-3 col-md-4 col-xs-6 taxon">
-				                <a href="#">
-				                    <img src="img/categories/icon-6.png" class="img-responsive img-centered" alt="" >
-				                </a>
-				            </div>
 							<div id="success"></div>
 		                </div>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-default" id="saveCat" >Save</button>
                         </div>
                     </div>
+                    <div class="col-lg-12">
+	                	<h1 class="page-header">Categories Gallery</h1>
+		            </div>
+		            <div class="icons"></div>
                 </div>
             </div>
             
