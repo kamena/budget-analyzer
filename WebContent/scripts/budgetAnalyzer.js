@@ -38,7 +38,6 @@ $(document).ready(function(){
 		$("#register-form").hide();
 		$("#portfolio").show();
 		$("#profile-dropdown").show();
-//		console.log(responce);
 		_url = ENDPOINT+"users"+"?id="+value;
 		console.log(_url);
 		var createPromise = $.ajax({
@@ -49,8 +48,39 @@ $(document).ready(function(){
 			console.log(responce[0].fname);
 			$("#logged-username").text(responce[0].fname);
 		});
-//		userId = responce[0].id;
-//		console.log("UserID: " + userID);
+		
+		console.log("Value: " + value);
+		_urlCat = ENDPOINT+"categories?user_id="+value;
+		console.log(_urlCat);
+		var createPromise = $.ajax({
+			url: _urlCat,
+			method: "GET",
+			dataType: "JSON"
+		}).then(function(responce){
+			console.log("Respoce: " + responce);
+			
+			showCategories(responce);
+		});
+	}
+	
+	function showCategories(responce){
+		numberCat = responce.length;
+		for(i = 0; i < numberCat; i++) {
+			iconNum = responce[i].icon_num;
+			catName = responce[i].cat_name;
+			category = '<div class="col-sm-4 portfolio-item">\
+                	<a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">\
+			            <div class="caption">\
+			                <div class="caption-content">\
+			                    <h1>'+catName+'</h1>\
+			                </div>\
+			            </div>\
+			            <div class="category"><img src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered icon" alt="" /></div>\
+			        </a>\
+			    </div>';
+			$('.existing-categories').append(category);
+		}
+		
 	}
 	
 	function ReadCookie() {
@@ -142,6 +172,7 @@ $(document).ready(function(){
 		}).then(function(responce){
 			console.log(responce);
 		});
+		location.reload();
 	}
 
 	function loginUser(){
@@ -163,6 +194,8 @@ $(document).ready(function(){
 				loggedUser(userID);
 			}
 		});
+		
+		
 	}
 
 	function attachHandlers(){		

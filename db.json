@@ -54,15 +54,40 @@
       "id": 2
     },
     {
-      "cat_name": "",
-      "user_id": 3,
-      "id": 3
-    },
-    {
       "cat_name": "Chocolate",
       "icon_num": 7,
       "user_id": 3,
       "id": 4
+    },
+    {
+      "cat_name": "Food",
+      "icon_num": 15,
+      "user_id": 3,
+      "id": 5
+    },
+    {
+      "cat_name": "Beer",
+      "icon_num": 4,
+      "user_id": 3,
+      "id": 6
+    },
+    {
+      "cat_name": "Fun",
+      "icon_num": 10,
+      "user_id": 3,
+      "id": 7
+    },
+    {
+      "cat_name": "Fancy meal",
+      "icon_num": 42,
+      "user_id": 3,
+      "id": 8
+    },
+    {
+      "cat_name": "Pizza",
+      "icon_num": 32,
+      "user_id": 3,
+      "id": 9
     }
   ],
   "products": [
