@@ -53,3 +53,48 @@
 .category img {
   width: 206px;
 }
+
+.colors .color {
+	border-radius: 3px;
+	height: 65px;
+	width: 65px;
+	margin: 5px 16px;
+	cursor: pointer;
+}
+
+.colors #color1 {
+	background: #e05b49;
+}
+.colors #color2 {
+	background: #ba4c63;
+}
+.colors #color3 {
+	background: #1d83c1;
+}
+.colors #color4 {
+	background: #1037b5;
+}
+.colors #color5 {
+	background: #efc84a;
+}
+.colors #color6 {
+	background: #ccb2a3;
+}
+.colors #color7 {
+	background: #334d5c;
+}
+.colors #color8 {
+	background: #da5e01;
+}
+.colors #color9 {
+	background: #fcb940;
+}
+.colors #color10 {
+	background: #01a98c;
+}
+.colors #color11 {
+	background: #9448b3;
+}
+.colors #color12 {
+	background: #c73b26;
+}

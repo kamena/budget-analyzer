@@ -79,8 +79,7 @@ $(document).ready(function(){
 			        </a>\
 			    </div>';
 			$('.existing-categories').append(category);
-		}
-		
+		}		
 	}
 	
 	function ReadCookie() {
@@ -241,6 +240,10 @@ $(document).ready(function(){
 		    	<img id="'+i+'" src="img/categories/icon-'+i+'.png" class="img-responsive img-centered icon" alt="" >\
 		    </div>';	
 			$( ".icons" ).append(icon);
+		}
+		for(i = 1; i <= 12; i++) {
+			categoryColor = '<div class="col-xs-1 color" id="color'+i+'"></div>';
+			$( ".colors" ).append(categoryColor);
 		}
 		
 		$(".icon").on("click", function(){
