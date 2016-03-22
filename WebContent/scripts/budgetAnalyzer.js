@@ -75,7 +75,7 @@ $(document).ready(function(){
 			                    <h1>'+catName+'</h1>\
 			                </div>\
 			            </div>\
-			            <div class="category"><img src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered icon" alt="" /></div>\
+			            <div class="category"><img src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered" alt="" /></div>\
 			        </a>\
 			    </div>';
 			$('.existing-categories').append(category);
@@ -152,17 +152,18 @@ $(document).ready(function(){
 		});
 	}
 	
-	function saveCategory(user_id) {
+	function saveCategory() {
 		var cat_name = $("#category").val();
 		var icon_num = $(".chosen-icon .icon").attr( "id" );
 		var user_id = ReadCookie();
-		console.log(user_id);
+		
 		data = {
 			"cat_name": cat_name,
 			"icon_num": icon_num,
 			"user_id": user_id,
 		}
 		_url = ENDPOINT + "categories";
+		console.log(_url);
 		var createPromise = $.ajax({
 			url: _url,
 			method: "POST",
@@ -172,7 +173,8 @@ $(document).ready(function(){
 		}).then(function(responce){
 			console.log(responce);
 		});
-		location.reload();
+		
+		return 0;
 	}
 
 	function loginUser(){
@@ -250,7 +252,10 @@ $(document).ready(function(){
 		});
 		
 		$("#saveCat").on("click", function(){
+			alert("Category");
 			saveCategory();
+			setTimeout(function(){ location.reload(); }, 1000);
+			
 		});
 		
 	}

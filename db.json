@@ -39,6 +39,14 @@
       "username": "test-3",
       "password": 123456,
       "id": 5
+    },
+    {
+      "fname": "new",
+      "lname": "new",
+      "email": "new@",
+      "username": "new",
+      "password": "new",
+      "id": 6
     }
   ],
   "categories": [
@@ -88,6 +96,18 @@
       "icon_num": 32,
       "user_id": 3,
       "id": 9
+    },
+    {
+      "cat_name": "Music",
+      "icon_num": 20,
+      "user_id": 3,
+      "id": 10
+    },
+    {
+      "cat_name": "Shopping",
+      "icon_num": 21,
+      "user_id": 3,
+      "id": 13
     }
   ],
   "products": [

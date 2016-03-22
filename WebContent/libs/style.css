@@ -46,12 +46,10 @@
 
 .category {
   background-color: #1fa4b6;
-  width: 360px;
-  height: 260px;
+  padding: 27px 50px;
 }
 
 
 .category img {
   width: 206px;
-  padding-top: 28px;
 }
