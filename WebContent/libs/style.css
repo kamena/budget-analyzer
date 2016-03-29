@@ -98,3 +98,50 @@
 .colors #color12 {
 	background: #c73b26;
 }
+
+.add-element-container {
+	display: inline-block;
+}
+
+.add-element-container .add-element-img {
+	display: inline-block;
+	width: 15%;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.add-element-container .add-element-img img {
+	height: 70px; 
+	margin-bottom: 0px !important;
+}
+
+#add-element {
+	width: 70%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#add-element-price {
+	display: inline-block;
+    width: 10%;
+}
+
+.element {
+	display: block;
+	font-size: 1.5em;
+	padding: 10px;
+}
+
+.element .element-name,
+.element .element-price {
+	display: inline-block;
+	vertical-align: middle;
+}
+.element .element-name {
+	width: 80%;
+    text-align: left;
+}
+.element .element-price {
+	width: 15px;
+	text-align: right;
+}

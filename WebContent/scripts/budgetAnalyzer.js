@@ -194,9 +194,31 @@ $(document).ready(function(){
 				document.cookie="moneyLogged="+userID;
 				loggedUser(userID);
 			}
+		});		
+	}
+	
+	function addElementToCat() {
+		var product_name = $(".add-element-db").val();
+		var user_id = ReadCookie();
+		var cat_id = $(".show-category-name").attr("id");
+		
+		data = {
+			"product_name": product_name,
+			"product_price": product_price,
+			"user_id": user_id,
+			"cat_id": cat_id
+		}
+		_url = ENDPOINT + "categories";
+		console.log(_url);
+		var createPromise = $.ajax({
+			url: _url,
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(data),
+			dataType: "json"
+		}).then(function(responce){
+			console.log(responce);
 		});
-		
-		
 	}
 
 	function attachHandlers(){		
@@ -232,6 +254,10 @@ $(document).ready(function(){
 		$("#show-register-form").on("click", function(){
 			$("#login-form").hide();
 			$("#register-form").show();
+		});
+		
+		$(".add-element-db").on("click", function(){
+			addElementToCat();
 		});
 		
 		
