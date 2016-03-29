@@ -116,6 +116,19 @@
       "cat_name": "Chocolate cake",
       "cat_slug": "chocolate-cake",
       "price": 5
+    },
+    {
+      "product_price": 18,
+      "user_id": 3,
+      "cat_id": 5,
+      "id": 2
+    },
+    {
+      "product_name": "Potatoes",
+      "product_price": 2.5,
+      "user_id": 3,
+      "cat_id": 5,
+      "id": 3
     }
   ]
 }

@@ -198,17 +198,17 @@ $(document).ready(function(){
 	}
 	
 	function addElementToCat() {
-		var product_name = $(".add-element-db").val();
+		var product_name = $("#add-element-name").val();
 		var user_id = ReadCookie();
 		var cat_id = $(".show-category-name").attr("id");
-		
+		var product_price = $("#add-element-price").val();
 		data = {
 			"product_name": product_name,
 			"product_price": product_price,
 			"user_id": user_id,
 			"cat_id": cat_id
 		}
-		_url = ENDPOINT + "categories";
+		_url = ENDPOINT + "products";
 		console.log(_url);
 		var createPromise = $.ajax({
 			url: _url,
