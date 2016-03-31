@@ -129,6 +129,20 @@
       "user_id": 3,
       "cat_id": 5,
       "id": 3
+    },
+    {
+      "product_name": "Musaka",
+      "product_price": 3.5,
+      "user_id": 3,
+      "cat_id": 5,
+      "id": 4
+    },
+    {
+      "product_name": "Milka",
+      "product_price": 2,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 5
     }
   ]
 }

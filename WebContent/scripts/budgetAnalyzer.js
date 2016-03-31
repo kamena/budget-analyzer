@@ -68,10 +68,11 @@ $(document).ready(function(){
 		for(i = 0; i < numberCat; i++) {
 			iconNum = responce[i].icon_num;
 			catName = responce[i].cat_name;
+			catId = responce[i].id;
 			category = '<div class="col-sm-4 portfolio-item">\
-                	<a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">\
+                	<a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">\
 			            <div class="caption">\
-			                <div class="caption-content">\
+			                <div class="caption-content" id="'+catId+'">\
 			                    <h1>'+catName+'</h1>\
 			                </div>\
 			            </div>\
@@ -220,6 +221,35 @@ $(document).ready(function(){
 			console.log(responce);
 		});
 	}
+	
+	function showCatProducts(catId){
+		console.log("Hello from the other side");
+		var user_id = ReadCookie();
+		console.log("Cat ID: " + catId);
+		_url = ENDPOINT+"products"+"?user_id="+user_id+"&cat_id="+catId;
+		console.log(_url);
+		var createPromise = $.ajax({
+			url: _url,
+			method: "GET",
+			dataType: "JSON"
+		}).then(function(responce){
+			if (responce == ""){
+				$('.all-products').html("No categories to show");
+			} else {
+				console.log(responce);
+				$.each(responce.d, function(key, value) {
+				    //For example
+				    console.log(key + value)
+				})
+			}
+		});	
+		product = '<div class="form-group col-xs-12 floating-label-form-group controls">\
+			<div class="element">\
+				<div class="element-name">Pizza</div>\
+				<div class="element-price">20$</div>\
+			</div>\
+		</div>';
+	}
 
 	function attachHandlers(){		
 		$("#profile-dropdown").hide();
@@ -285,6 +315,27 @@ $(document).ready(function(){
 			saveCategory();
 			setTimeout(function(){ location.reload(); }, 1000);
 			
+		});
+		
+		$(document).on("click",".portfolio-link", function(){
+			catId = $(this).find('.caption-content').attr("id");
+			$(".show-category-name").attr("id", catId);
+			
+			_url = ENDPOINT+"categories"+"?id="+catId;
+
+			var createPromise = $.ajax({
+				url: _url,
+				method: "GET",
+				dataType: "JSON"
+			}).then(function(responce){
+				if (responce == ""){
+					alert("Error!");
+				} else {
+					catName = responce[0].cat_name;
+					$(".show-category-name").html(catName);
+				}
+			});	
+			showCatProducts(catId);
 		});
 		
 	}
