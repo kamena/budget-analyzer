@@ -218,16 +218,14 @@ $(document).ready(function(){
 			data: JSON.stringify(data),
 			dataType: "json"
 		}).then(function(responce){
-			console.log(responce);
+			showCatProducts(cat_id);
 		});
 	}
 	
 	function showCatProducts(catId){
-		console.log("Hello from the other side");
 		var user_id = ReadCookie();
-		console.log("Cat ID: " + catId);
+
 		_url = ENDPOINT+"products"+"?user_id="+user_id+"&cat_id="+catId;
-		console.log(_url);
 		var createPromise = $.ajax({
 			url: _url,
 			method: "GET",
@@ -237,18 +235,20 @@ $(document).ready(function(){
 				$('.all-products').html("No categories to show");
 			} else {
 				console.log(responce);
-				$.each(responce.d, function(key, value) {
-				    //For example
-				    console.log(key + value)
-				})
+				productList = '';
+				_.forEach(responce, function(product) {
+					productList += '<div class="form-group col-xs-12 floating-label-form-group controls">\
+						<div class="element">\
+							<div class="element-name">'+ product.product_name +'</div>\
+							<div class="element-price">'+ product.product_price +'$</div>\
+						</div>\
+					</div>';
+				    
+				});
+				$('.all-products').html(productList);
 			}
 		});	
-		product = '<div class="form-group col-xs-12 floating-label-form-group controls">\
-			<div class="element">\
-				<div class="element-name">Pizza</div>\
-				<div class="element-price">20$</div>\
-			</div>\
-		</div>';
+		
 	}
 
 	function attachHandlers(){		

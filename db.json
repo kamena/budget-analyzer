@@ -143,6 +143,34 @@
       "user_id": 3,
       "cat_id": 4,
       "id": 5
+    },
+    {
+      "product_name": "White chocolate",
+      "product_price": 1.5,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 6
+    },
+    {
+      "product_name": "Oreo",
+      "product_price": 2.5,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 7
+    },
+    {
+      "product_name": "Muffin",
+      "product_price": 5,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 8
+    },
+    {
+      "product_name": "Hot chocolate",
+      "product_price": 3,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 9
     }
   ]
 }
