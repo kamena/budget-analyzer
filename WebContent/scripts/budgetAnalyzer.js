@@ -44,9 +44,9 @@ $(document).ready(function(){
 			url: _url,
 			method: "GET",
 			dataType: "JSON"
-		}).then(function(responce){
-			console.log(responce[0].fname);
-			$("#logged-username").text(responce[0].fname);
+		}).then(function(response){
+			console.log(response[0].fname);
+			$("#logged-username").text(response[0].fname);
 		});
 		
 		console.log("Value: " + value);
@@ -56,21 +56,19 @@ $(document).ready(function(){
 			url: _urlCat,
 			method: "GET",
 			dataType: "JSON"
-		}).then(function(responce){
-			console.log("Respoce: " + responce);
-			
-			showCategories(responce);
+		}).then(function(response){			
+			showCategories(response);
 		});
 	}
 	
-	function showCategories(responce){
-		numberCat = responce.length;
+	function showCategories(response){
+		numberCat = response.length;
 		for(i = 0; i < numberCat; i++) {
-			iconNum = responce[i].icon_num;
-			catName = responce[i].cat_name;
-			catId = responce[i].id;
+			iconNum = response[i].icon_num;
+			catName = response[i].cat_name;
+			catId = response[i].id;
 			category = '<div class="col-sm-4 portfolio-item">\
-                	<a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">\
+                	<a href="#portfolioModal2" class="portfolio-link category-link" data-toggle="modal">\
 			            <div class="caption">\
 			                <div class="caption-content" id="'+catId+'">\
 			                    <h1>'+catName+'</h1>\
@@ -116,8 +114,8 @@ $(document).ready(function(){
 			url: _url,
 			method: "GET",
 			dataType: "JSON"
-		}).then(function(responce){
-			if (responce == ""){
+		}).then(function(response){
+			if (response == ""){
 				registerUser();
 			} else {
 				alert("Username is already taken!");
@@ -147,8 +145,8 @@ $(document).ready(function(){
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(data),
 			dataType: "json"
-		}).then(function(responce){
-			console.log(responce);
+		}).then(function(response){
+			console.log(response);
 		});
 	}
 	
@@ -170,8 +168,8 @@ $(document).ready(function(){
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(data),
 			dataType: "json"
-		}).then(function(responce){
-			console.log(responce);
+		}).then(function(response){
+			console.log(response);
 		});
 		
 		return 0;
@@ -186,12 +184,12 @@ $(document).ready(function(){
 			url: _url,
 			method: "GET",
 			dataType: "JSON"
-		}).then(function(responce){
-			if (responce == ""){
+		}).then(function(response){
+			if (response == ""){
 				alert("Wrong username or password!");
 			} else {
-				console.log(responce);
-				userID = responce[0].id;
+				console.log(response);
+				userID = response[0].id;
 				document.cookie="moneyLogged="+userID;
 				loggedUser(userID);
 			}
@@ -217,7 +215,7 @@ $(document).ready(function(){
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(data),
 			dataType: "json"
-		}).then(function(responce){
+		}).then(function(response){
 			showCatProducts(cat_id);
 		});
 	}
@@ -230,15 +228,16 @@ $(document).ready(function(){
 			url: _url,
 			method: "GET",
 			dataType: "JSON"
-		}).then(function(responce){
-			if (responce == ""){
+		}).then(function(response){
+			if (response == ""){
 				$('.all-products').html("No categories to show");
 			} else {
-				console.log(responce);
+				console.log(response);
 				productList = '';
-				_.forEach(responce, function(product) {
+				_.forEach(response, function(product) {
 					productList += '<div class="form-group col-xs-12 floating-label-form-group controls">\
 						<div class="element">\
+							<div class="remove-element"><img src="img/portfolio/remove.png" class="img-responsive img-centered" alt=""></div>\
 							<div class="element-name">'+ product.product_name +'</div>\
 							<div class="element-price">'+ product.product_price +'$</div>\
 						</div>\
@@ -304,10 +303,15 @@ $(document).ready(function(){
 		
 		$(".icon").on("click", function(){
 			iconNum = $(this).attr( "id" );
-			icon = '<div class="col-xs-3">\
+			icon = '<div class="col-xs-3 show-icon">\
 		    	<img id="'+iconNum+'" src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered icon" alt="" >\
 		    </div>';
 			$(".chosen-icon").html(icon);
+		});
+		
+		$(".color").on("click", function(){
+			color = $(this).css("background-color");
+			$(".show-icon").css('background-color', color);
 		});
 		
 		$("#saveCat").on("click", function(){
@@ -317,7 +321,7 @@ $(document).ready(function(){
 			
 		});
 		
-		$(document).on("click",".portfolio-link", function(){
+		$(document).on("click",".category-link", function(){
 			catId = $(this).find('.caption-content').attr("id");
 			$(".show-category-name").attr("id", catId);
 			
@@ -327,15 +331,19 @@ $(document).ready(function(){
 				url: _url,
 				method: "GET",
 				dataType: "JSON"
-			}).then(function(responce){
-				if (responce == ""){
+			}).then(function(response){
+				if (response == ""){
 					alert("Error!");
 				} else {
-					catName = responce[0].cat_name;
+					catName = response[0].cat_name;
 					$(".show-category-name").html(catName);
 				}
 			});	
 			showCatProducts(catId);
+		});
+		
+		$(".remove-element").on("click", function(){
+			
 		});
 		
 	}

@@ -99,6 +99,11 @@
 	background: #c73b26;
 }
 
+.show-icon img {
+	margin: 0px !important;
+	padding: 13px;
+}
+
 .add-element-container {
 	display: inline-block;
 }
@@ -142,6 +147,20 @@
     text-align: left;
 }
 .element .element-price {
-	width: 15px;
+	width: 5%;
 	text-align: right;
+}
+
+
+.element .remove-element {
+	display: inline-block;
+	width: 5%; 
+	vertical-align: middle;
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+.element .remove-element img {
+	height: auto; 
+	margin-bottom: 0px !important;
 }
