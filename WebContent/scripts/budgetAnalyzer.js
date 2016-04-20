@@ -66,15 +66,16 @@ $(document).ready(function(){
 		for(i = 0; i < numberCat; i++) {
 			iconNum = response[i].icon_num;
 			catName = response[i].cat_name;
+			iconBack = response[i].icon_back;
 			catId = response[i].id;
-			category = '<div class="col-sm-4 portfolio-item">\
+			category = '<div class="col-sm-4 portfolio-item" style="background-color='+iconBack+'">\
                 	<a href="#portfolioModal2" class="portfolio-link category-link" data-toggle="modal">\
 			            <div class="caption">\
 			                <div class="caption-content" id="'+catId+'">\
 			                    <h1>'+catName+'</h1>\
 			                </div>\
 			            </div>\
-			            <div class="category"><img src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered" alt="" /></div>\
+			            <div class="category" style="background-color:'+iconBack+'"><img src="img/categories/icon-'+iconNum+'.png" class="img-responsive img-centered" alt="" /></div>\
 			        </a>\
 			    </div>';
 			$('.existing-categories').append(category);
@@ -153,12 +154,15 @@ $(document).ready(function(){
 	function saveCategory() {
 		var cat_name = $("#category").val();
 		var icon_num = $(".chosen-icon .icon").attr( "id" );
+		var icon_back = $(".chosen-icon .show-icon").css("background-color");
+		console.log(icon_back);
 		var user_id = ReadCookie();
 		
 		data = {
 			"cat_name": cat_name,
 			"icon_num": icon_num,
 			"user_id": user_id,
+			"icon_back": icon_back
 		}
 		_url = ENDPOINT + "categories";
 		console.log(_url);

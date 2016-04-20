@@ -108,6 +108,39 @@
       "icon_num": 21,
       "user_id": 3,
       "id": 13
+    },
+    {
+      "cat_name": "Vacations",
+      "icon_num": 6,
+      "icon_back": "rgba(0, 0, 0, 0)",
+      "user_id": 3,
+      "id": 14
+    },
+    {
+      "cat_name": "Work",
+      "icon_num": 19,
+      "user_id": 3,
+      "id": 15
+    },
+    {
+      "cat_name": "Calc",
+      "icon_num": 8,
+      "user_id": 3,
+      "id": 16
+    },
+    {
+      "cat_name": "Cakes",
+      "icon_num": 7,
+      "user_id": 3,
+      "icon_back": "rgb(199, 59, 38)",
+      "id": 17
+    },
+    {
+      "cat_name": "Beer",
+      "icon_num": 4,
+      "user_id": 3,
+      "icon_back": "rgb(239, 200, 74)",
+      "id": 18
     }
   ],
   "products": [
@@ -171,6 +204,27 @@
       "user_id": 3,
       "cat_id": 4,
       "id": 9
+    },
+    {
+      "product_name": "Expensive chocolate",
+      "product_price": 522,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 10
+    },
+    {
+      "product_name": "Expensive chocolate",
+      "product_price": 52248,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 11
+    },
+    {
+      "product_name": "Халва",
+      "product_price": 3.9,
+      "user_id": 3,
+      "cat_id": 4,
+      "id": 12
     }
   ]
 }
