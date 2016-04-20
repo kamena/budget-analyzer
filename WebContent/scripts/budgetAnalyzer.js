@@ -240,7 +240,7 @@ $(document).ready(function(){
 				productList = '';
 				_.forEach(response, function(product) {
 					productList += '<div class="form-group col-xs-12 floating-label-form-group controls">\
-						<div class="element">\
+						<div class="element" id="'+product.id+'">\
 							<div class="remove-element"><img src="img/portfolio/remove.png" class="img-responsive img-centered" alt=""></div>\
 							<div class="element-name">'+ product.product_name +'</div>\
 							<div class="element-price">'+ product.product_price +'$</div>\
@@ -345,9 +345,17 @@ $(document).ready(function(){
 			});	
 			showCatProducts(catId);
 		});
-		
-		$(".remove-element").on("click", function(){
-			
+		$(document).on("click",".remove-element", function(){
+			productId = $(this).parent(".element").attr("id");
+			catId = $('.show-category-name').attr("id");
+			_url = ENDPOINT+"products/"+productId;
+			console.log("CatId:" + catId);
+			$.ajax({
+				url: _url,
+				method: "DELETE"
+			}).then(function(response) {
+				showCatProducts(catId);
+			});
 		});
 		
 	}

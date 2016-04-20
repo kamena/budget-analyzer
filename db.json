@@ -169,62 +169,6 @@
       "user_id": 3,
       "cat_id": 5,
       "id": 4
-    },
-    {
-      "product_name": "Milka",
-      "product_price": 2,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 5
-    },
-    {
-      "product_name": "White chocolate",
-      "product_price": 1.5,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 6
-    },
-    {
-      "product_name": "Oreo",
-      "product_price": 2.5,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 7
-    },
-    {
-      "product_name": "Muffin",
-      "product_price": 5,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 8
-    },
-    {
-      "product_name": "Hot chocolate",
-      "product_price": 3,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 9
-    },
-    {
-      "product_name": "Expensive chocolate",
-      "product_price": 522,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 10
-    },
-    {
-      "product_name": "Expensive chocolate",
-      "product_price": 52248,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 11
-    },
-    {
-      "product_name": "Халва",
-      "product_price": 3.9,
-      "user_id": 3,
-      "cat_id": 4,
-      "id": 12
     }
   ]
 }
