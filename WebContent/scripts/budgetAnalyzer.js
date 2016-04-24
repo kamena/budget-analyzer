@@ -103,6 +103,7 @@ $(document).ready(function(){
 		document.cookie = "moneyLogged=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 		location.reload();
 		$("#profile-dropdown").hide();
+		window.location.href = 'index.html';
 	}
 
 	function isUsernameTaken(){
@@ -382,6 +383,7 @@ $(document).ready(function(){
 		});
 		
 		$("#log-out").on("click", function(){
+			window.location.href = 'index.html';
 			logOut();
 		});
 		
@@ -425,10 +427,8 @@ $(document).ready(function(){
 		});
 		
 		$("#saveCat").on("click", function(){
-			alert("Category");
 			saveCategory();
-			setTimeout(function(){ location.reload(); }, 1000);
-			
+			setTimeout(function(){ location.reload(); }, 1000);		
 		});
 		
 		$(document).on("click",".category-link", function(){
