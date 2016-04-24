@@ -39,7 +39,6 @@ $(document).ready(function(){
 		$("#portfolio").show();
 		$("#profile-dropdown").show();
 		_url = ENDPOINT+"users"+"?id="+value;
-		console.log(_url);
 		var createPromise = $.ajax({
 			url: _url,
 			method: "GET",
@@ -49,9 +48,7 @@ $(document).ready(function(){
 			$("#logged-username").text(response[0].fname);
 		});
 		
-		console.log("Value: " + value);
 		_urlCat = ENDPOINT+"categories?user_id="+value;
-		console.log(_urlCat);
 		var createPromise = $.ajax({
 			url: _urlCat,
 			method: "GET",
@@ -162,7 +159,8 @@ $(document).ready(function(){
 			"cat_name": cat_name,
 			"icon_num": icon_num,
 			"user_id": user_id,
-			"icon_back": icon_back
+			"icon_back": icon_back,
+			"total_money": 0
 		}
 		_url = ENDPOINT + "categories";
 		console.log(_url);
@@ -192,7 +190,6 @@ $(document).ready(function(){
 			if (response == ""){
 				alert("Wrong username or password!");
 			} else {
-				console.log(response);
 				userID = response[0].id;
 				document.cookie="moneyLogged="+userID;
 				loggedUser(userID);
@@ -200,11 +197,64 @@ $(document).ready(function(){
 		});		
 	}
 	
+	function increaseTotalMoney(productPrice, response) {	
+		
+		catId = response[0].id;
+		catName = response[0].cat_name;
+		iconNum = response[0].icon_num;
+		userId = response[0].user_id;
+		iconBack = response[0].icon_back;
+		
+		totalMoney = response[0].total_money;
+		totalMoney = parseInt(totalMoney);
+		totalMoney += productPrice;
+		
+		_url = ENDPOINT+"categories/"+catId;
+		
+		var catInfo = {
+				cat_name: catName,
+				icon_num: iconNum,
+				user_id: userId,
+				icon_back: iconBack,
+				total_money: totalMoney,
+				id: catId
+		};
+		$.ajax( _url, {
+			method: "PUT",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(catInfo),
+			dataType: "json"
+		}).then(function(response) {
+			console.log(response);
+		});
+	}
+	
 	function addElementToCat() {
 		var product_name = $("#add-element-name").val();
 		var user_id = ReadCookie();
 		var cat_id = $(".show-category-name").attr("id");
 		var product_price = $("#add-element-price").val();
+		
+		
+		_url = ENDPOINT+"categories"+"?id="+cat_id;
+		var createPromise = $.ajax({
+			url: _url,
+			method: "GET",
+			dataType: "JSON"
+		}).then(function(response){
+			if (response == ""){
+				alert("You sure you buy something like this?");
+			} else {
+				
+				totalMoneySpent = parseInt(response[0].total_money);
+				console.log(totalMoneySpent);
+				product_price = parseInt(product_price);
+				if (product_price) {
+					increaseTotalMoney(product_price, response);
+				}
+			}
+		});	
+		
 		data = {
 			"product_name": product_name,
 			"product_price": product_price,
@@ -236,7 +286,6 @@ $(document).ready(function(){
 			if (response == ""){
 				$('.all-products').html("No categories to show");
 			} else {
-				console.log(response);
 				productList = '';
 				_.forEach(response, function(product) {
 					productList += '<div class="form-group col-xs-12 floating-label-form-group controls">\
@@ -253,6 +302,62 @@ $(document).ready(function(){
 		});	
 		
 	}
+	
+	$(function(){
+		if($('body').attr('class') == 'stats'){
+//			countCategoryCost();
+			//Better to construct options first and then pass it as a parameter
+			var options = {
+				title: {
+					text: "'The act of giving is the soul of living.'  -Loreen Arbus"
+				},
+		                animationEnabled: true,
+				data: [
+				{
+					type: "column", //change it to line, area, bar, pie, etc
+					dataPoints: [
+						{ y: 10, label: "Food" },
+						{ y: 20, label: "School" },
+						{ y: 30, label: "Magazine" },
+						{ y: 40, label: "Coffe" },
+						{ y: 50, label: "Drinks" },
+						{ y: 60, label: "Furniture" },
+						{ y: 70, label: "Chocolate" },
+						{ y: 80, label: "Beer" }
+					]
+				}
+				]
+			};
+				
+			$("#chartContainer").CanvasJSChart(options);
+		
+	
+			//Better to construct options first and then pass it as a parameter
+			var totalSpentOptions = {
+				title: {
+					text: "How much money did you spent the past days?"
+				},
+		                animationEnabled: true,
+				data: [
+				{
+					type: "spline", //change it to line, area, column, pie, etc
+					dataPoints: [
+						{ x: new Date(2016,4,18 ), y: 10 },
+						{ x: new Date(2016,4,19 ), y: 12 },
+						{ x: new Date(2016,4,20 ), y: 8 },
+						{ x: new Date(2016,4,21 ), y: 14 },
+						{ x: new Date(2016,4,22 ), y: 6 },
+						{ x: new Date(2016,4,23 ), y: 24 },
+						{ x: new Date(2016,4,24 ), y: -4 },
+						{ x: new Date(2016,4,25 ), y: 10 }
+					]
+				}
+				]
+			};
+	
+			$("#totalSpent").CanvasJSChart(totalSpentOptions);
+		}
+	});
 
 	function attachHandlers(){		
 		$("#profile-dropdown").hide();
@@ -345,16 +450,31 @@ $(document).ready(function(){
 			});	
 			showCatProducts(catId);
 		});
+		
 		$(document).on("click",".remove-element", function(){
 			productId = $(this).parent(".element").attr("id");
-			catId = $('.show-category-name').attr("id");
+			catId = $('.show-category-name').attr("id");		
+			
 			_url = ENDPOINT+"products/"+productId;
-			console.log("CatId:" + catId);
+			
 			$.ajax({
 				url: _url,
 				method: "DELETE"
 			}).then(function(response) {
 				showCatProducts(catId);
+			});
+		});
+		
+		$(document).on("click", ".remove-cat", function(){
+			catId = $('.show-category-name').attr("id");
+			
+			_url = ENDPOINT+"categories/"+catId;
+			
+			$.ajax({
+				url: _url,
+				method: "DELETE"
+			}).then(function(response) {
+				location.reload();
 			});
 		});
 		
