@@ -168,3 +168,7 @@
 .canvasjs-chart-credit {
 	display: none;
 }
+
+#portfolio .portfolio-item .portfolio-link .caption .caption-content {
+	top: 40% !important;
+}

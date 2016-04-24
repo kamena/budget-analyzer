@@ -199,17 +199,12 @@ $(document).ready(function(){
 		});		
 	}
 	
-	function increaseTotalMoney(productPrice, response) {	
-		
+	function increaseTotalMoney(totalMoney, response) {		
 		catId = response[0].id;
 		catName = response[0].cat_name;
 		iconNum = response[0].icon_num;
 		userId = response[0].user_id;
 		iconBack = response[0].icon_back;
-		
-		totalMoney = response[0].total_money;
-		totalMoney = parseInt(totalMoney);
-		totalMoney += productPrice;
 		
 		_url = ENDPOINT+"categories/"+catId;
 		
@@ -251,8 +246,11 @@ $(document).ready(function(){
 				totalMoneySpent = parseInt(response[0].total_money);
 				console.log(totalMoneySpent);
 				product_price = parseInt(product_price);
+
+				totalMoneySpent += product_price;
+				
 				if (product_price) {
-					increaseTotalMoney(product_price, response);
+					increaseTotalMoney(totalMoneySpent, response);
 				}
 			}
 		});	
@@ -307,31 +305,50 @@ $(document).ready(function(){
 	
 	$(function(){
 		if($('body').attr('class') == 'stats'){
-//			countCategoryCost();
-			//Better to construct options first and then pass it as a parameter
-			var options = {
-				title: {
-					text: "'The act of giving is the soul of living.'  -Loreen Arbus"
-				},
-		                animationEnabled: true,
-				data: [
-				{
-					type: "column", //change it to line, area, bar, pie, etc
-					dataPoints: [
-						{ y: 10, label: "Food" },
-						{ y: 20, label: "School" },
-						{ y: 30, label: "Magazine" },
-						{ y: 40, label: "Coffe" },
-						{ y: 50, label: "Drinks" },
-						{ y: 60, label: "Furniture" },
-						{ y: 70, label: "Chocolate" },
-						{ y: 80, label: "Beer" }
-					]
-				}
-				]
-			};
+			
+			var user_id = ReadCookie();
+			_url = ENDPOINT+"categories"+"?user_id="+user_id;
+			var createPromise = $.ajax({
+				url: _url,
+				method: "GET",
+				dataType: "JSON"
+			}).then(function(response){
+				if (response == ""){
+					alert("Oh no, you don't have any categories. You sould totaly buy something new!");
+				} else {
+					categoriesStats = [];
+					
+					_.forEach(response, function(category) {
+						categoryStats = {};
+						categoryName = category.cat_name;
+						totalMoneySpent = category.total_money;
+						
+						if ( totalMoneySpent ) {
+							console.log(totalMoneySpent);
+							categoryStats['y'] = totalMoneySpent;
+							categoryStats['label'] = categoryName;
+
+							
+							categoriesStats.push(categoryStats);
+						}
+					});	
+							
+					var options = {
+						title: {
+							text: "'The act of giving is the soul of living.'  -Loreen Arbus"
+						},
+						animationEnabled: true,
+						data: [{
+							type: "column", //change it to line, area, bar, pie, etc
+							dataPoints: categoriesStats
+						}]
+					};
 				
-			$("#chartContainer").CanvasJSChart(options);
+					$("#chartContainer").CanvasJSChart(options);	
+				}
+			});	
+			
+			//Better to construct options first and then pass it as a parameter
 		
 	
 			//Better to construct options first and then pass it as a parameter
@@ -360,6 +377,38 @@ $(document).ready(function(){
 			$("#totalSpent").CanvasJSChart(totalSpentOptions);
 		}
 	});
+	
+	function getCatInfo(cat_id, productPrice){
+		_url = ENDPOINT+"categories"+"?id="+cat_id;
+		var createPromise = $.ajax({
+			url: _url,
+			method: "GET",
+			dataType: "JSON"
+		}).then(function(response){
+			if (response == ""){
+				alert("You sure you buy something like this?");
+			} else {
+				totalMoneySpent = parseInt(response[0].total_money);
+				console.log(productPrice)
+				productPrice = parseInt(productPrice);
+				totalMoneySpent -= productPrice;
+				console.log(totalMoneySpent);
+				if (productPrice) {
+					increaseTotalMoney(totalMoneySpent, response);
+				}
+			}
+		});			
+	}
+	
+	function deleteProduct(_url, catId) {
+		$.ajax({
+			url: _url,
+			method: "DELETE"
+		}).then(function(response) {
+			showCatProducts(catId);
+			
+		});
+	}
 
 	function attachHandlers(){		
 		$("#profile-dropdown").hide();
@@ -456,14 +505,26 @@ $(document).ready(function(){
 			productId = $(this).parent(".element").attr("id");
 			catId = $('.show-category-name').attr("id");		
 			
-			_url = ENDPOINT+"products/"+productId;
+			_urlProduct = ENDPOINT+"products/"+productId;
+			console.log(_urlProduct);
+			var createPromise = $.ajax({
+				url: _urlProduct,
+				method: "GET",
+				dataType: "JSON"
+			}).then(function(response){
+				if (response == ""){
+					alert("There is nothing here!");
+				} else {
+					console.log(response);
+					totalMoney = response.product_price;
+					console.log("Product price: " + totalMoney);
+					getCatInfo(catId, totalMoney);
+				}
+				console.log(_urlProduct);
+				deleteProduct(_urlProduct, catId);
+			});	
 			
-			$.ajax({
-				url: _url,
-				method: "DELETE"
-			}).then(function(response) {
-				showCatProducts(catId);
-			});
+			
 		});
 		
 		$(document).on("click", ".remove-cat", function(){
