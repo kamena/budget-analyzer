@@ -60,6 +60,7 @@ $(document).ready(function(){
 	
 	function showCategories(response){
 		numberCat = response.length;
+		$('.existing-categories').html('');
 		for(i = 0; i < numberCat; i++) {
 			iconNum = response[i].icon_num;
 			catName = response[i].cat_name;
