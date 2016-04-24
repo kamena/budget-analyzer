@@ -324,7 +324,7 @@ $(document).ready(function(){
 				dataType: "JSON"
 			}).then(function(response){
 				if (response == ""){
-					alert("Oh no, you don't have any categories. You sould totaly buy something new!");
+					$( "#noStats" ).html("Oh no, you don't have any categories. You sould totaly add some and buy something!");
 				} else {
 					categoriesStats = [];
 					
@@ -361,9 +361,7 @@ $(document).ready(function(){
 				method: "GET",
 				dataType: "JSON"
 			}).then(function(response){
-				if (response == ""){
-					alert("Oh no, you don't have any products. You sould totaly buy something new!");
-				} else {
+				if (response != ""){
 					categoriesStats = [];
 					
 					_.forEach(response, function(product) {
@@ -399,9 +397,7 @@ $(document).ready(function(){
 				method: "GET",
 				dataType: "JSON"
 			}).then(function(response){
-				if (response == ""){
-					alert("Oh no, you don't have any products. You sould totaly buy something new!");
-				} else {
+				if (response != ""){
 					categoriesStats = [];
 					
 					_.forEach(response, function(product) {
