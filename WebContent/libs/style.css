@@ -164,3 +164,7 @@
 	height: auto; 
 	margin-bottom: 0px !important;
 }
+
+.canvasjs-chart-credit {
+	display: none;
+}
