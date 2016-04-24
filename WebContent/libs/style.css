@@ -172,3 +172,13 @@
 #portfolio .portfolio-item .portfolio-link .caption .caption-content {
 	top: 40% !important;
 }
+
+.icons div {
+    width: 65px;
+    padding: 0px;
+    margin: 10px 16px;
+    
+}
+.icons div img.icon {
+	margin-bottom: 0px !important;
+}

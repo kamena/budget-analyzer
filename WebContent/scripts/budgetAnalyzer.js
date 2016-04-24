@@ -44,7 +44,6 @@ $(document).ready(function(){
 			method: "GET",
 			dataType: "JSON"
 		}).then(function(response){
-			console.log(response[0].fname);
 			$("#logged-username").text(response[0].fname);
 		});
 		
@@ -91,13 +90,20 @@ $(document).ready(function(){
           if( name == "moneyLogged" ) {
         	  value = cookiearray[i].split('=')[1];
         	  value = value.split(';')[0];
-        	  console.log("Cookie value: " + value);
         	  loggedUser(value);
         	  
         	  return value;
           }
        }
     }
+	
+	function ShowUTCDate() {
+		var dNow = new Date();
+		var utc = new Date(dNow.getTime() + dNow.getTimezoneOffset() * 60000)
+		var utcdate= (utc.getMonth()+1) + '/' + utc.getDate() + '/' + utc.getFullYear(); //		+ ' ' + utc.getHours() + ':' + utc.getMinutes();
+
+		return utcdate;
+	}
 	
 	function logOut(){
 		document.cookie = "moneyLogged=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -154,7 +160,6 @@ $(document).ready(function(){
 		var cat_name = $("#category").val();
 		var icon_num = $(".chosen-icon .icon").attr( "id" );
 		var icon_back = $(".chosen-icon .show-icon").css("background-color");
-		console.log(icon_back);
 		var user_id = ReadCookie();
 		
 		data = {
@@ -165,7 +170,6 @@ $(document).ready(function(){
 			"total_money": 0
 		}
 		_url = ENDPOINT + "categories";
-		console.log(_url);
 		var createPromise = $.ajax({
 			url: _url,
 			method: "POST",
@@ -244,7 +248,6 @@ $(document).ready(function(){
 			} else {
 				
 				totalMoneySpent = parseInt(response[0].total_money);
-				console.log(totalMoneySpent);
 				product_price = parseInt(product_price);
 
 				totalMoneySpent += product_price;
@@ -252,17 +255,22 @@ $(document).ready(function(){
 				if (product_price) {
 					increaseTotalMoney(totalMoneySpent, response);
 				}
+				
+				
 			}
 		});	
+		
+		dateAdded = ShowUTCDate();
 		
 		data = {
 			"product_name": product_name,
 			"product_price": product_price,
 			"user_id": user_id,
-			"cat_id": cat_id
+			"cat_id": cat_id,
+			"date": dateAdded
 		}
 		_url = ENDPOINT + "products";
-		console.log(_url);
+		
 		var createPromise = $.ajax({
 			url: _url,
 			method: "POST",
@@ -307,6 +315,8 @@ $(document).ready(function(){
 		if($('body').attr('class') == 'stats'){
 			
 			var user_id = ReadCookie();
+			var todayDay = ShowUTCDate();
+			
 			_url = ENDPOINT+"categories"+"?user_id="+user_id;
 			var createPromise = $.ajax({
 				url: _url,
@@ -324,11 +334,8 @@ $(document).ready(function(){
 						totalMoneySpent = category.total_money;
 						
 						if ( totalMoneySpent ) {
-							console.log(totalMoneySpent);
 							categoryStats['y'] = totalMoneySpent;
-							categoryStats['label'] = categoryName;
-
-							
+							categoryStats['label'] = categoryName;							
 							categoriesStats.push(categoryStats);
 						}
 					});	
@@ -347,34 +354,112 @@ $(document).ready(function(){
 					$("#chartContainer").CanvasJSChart(options);	
 				}
 			});	
-			
-			//Better to construct options first and then pass it as a parameter
-		
-	
-			//Better to construct options first and then pass it as a parameter
-			var totalSpentOptions = {
-				title: {
-					text: "How much money did you spent the past days?"
-				},
-		                animationEnabled: true,
-				data: [
-				{
-					type: "spline", //change it to line, area, column, pie, etc
-					dataPoints: [
-						{ x: new Date(2016,4,18 ), y: 10 },
-						{ x: new Date(2016,4,19 ), y: 12 },
-						{ x: new Date(2016,4,20 ), y: 8 },
-						{ x: new Date(2016,4,21 ), y: 14 },
-						{ x: new Date(2016,4,22 ), y: 6 },
-						{ x: new Date(2016,4,23 ), y: 24 },
-						{ x: new Date(2016,4,24 ), y: -4 },
-						{ x: new Date(2016,4,25 ), y: 10 }
-					]
+
+			_url = ENDPOINT+"products"+"?user_id="+user_id+"&date="+todayDay;
+			var createPromise = $.ajax({
+				url: _url,
+				method: "GET",
+				dataType: "JSON"
+			}).then(function(response){
+				if (response == ""){
+					alert("Oh no, you don't have any products. You sould totaly buy something new!");
+				} else {
+					categoriesStats = [];
+					
+					_.forEach(response, function(product) {
+						categoryStats = {};
+						categoryName = product.product_name;
+						totalMoneySpent = product.product_price;
+						
+						if ( totalMoneySpent ) {
+							categoryStats['y'] = totalMoneySpent;
+							categoryStats['label'] = categoryName;							
+							categoriesStats.push(categoryStats);
+						}
+					});	
+							
+					var totalSpentOptions = {
+						title: {
+							text: "Whaat, where did my money go?"
+						},
+						animationEnabled: true,
+						data: [{
+							type: "pie", //change it to line, area, bar, pie, etc
+							dataPoints: categoriesStats
+						}]
+					};
+				
+					$("#totalSpent").CanvasJSChart(totalSpentOptions);
 				}
-				]
-			};
-	
-			$("#totalSpent").CanvasJSChart(totalSpentOptions);
+			});		
+			
+			_url = ENDPOINT+"products"+"?user_id="+user_id;
+			var createPromise = $.ajax({
+				url: _url,
+				method: "GET",
+				dataType: "JSON"
+			}).then(function(response){
+				if (response == ""){
+					alert("Oh no, you don't have any products. You sould totaly buy something new!");
+				} else {
+					categoriesStats = [];
+					
+					_.forEach(response, function(product) {
+						productDate = product.date;
+						splitProductDate = productDate.split("/");
+						
+						todayDateNow = todayDay.split("/");
+
+						categoryStats = {};
+						categoryName = product.product_name;
+						totalMoneySpent = product.product_price;
+						
+						if ( totalMoneySpent && splitProductDate[0] == todayDateNow[0] ) {
+							
+							categoryStats['y'] = totalMoneySpent;
+							categoryStats['label'] = productDate;							
+							categoriesStats.push(categoryStats);
+						}
+					});	
+							
+					var totalSpentOptions = {
+						title: {
+							text: "Why is there so much month left at the end of the money?"
+						},
+						animationEnabled: true,
+						data: [{
+							type: "line", //change it to line, area, bar, pie, etc
+							dataPoints: categoriesStats
+						}]
+					};
+				
+					$("#monthStat").CanvasJSChart(totalSpentOptions);
+				}
+			});	
+			
+//			var totalSpentOptions = {
+//				title: {
+//					text: "How much money did you spent the past days?"
+//				},
+//		                animationEnabled: true,
+//				data: [
+//				{
+//					type: "line", //change it to line, area, column, pie, etc
+//					dataPoints: [
+//						{ x: new Date(2016,4,18 ), y: 10 },
+//						{ x: new Date(2016,4,19 ), y: 12 },
+//						{ x: new Date(2016,4,20 ), y: 8 },
+//						{ x: new Date(2016,4,21 ), y: 14 },
+//						{ x: new Date(2016,4,22 ), y: 6 },
+//						{ x: new Date(2016,4,23 ), y: 24 },
+//						{ x: new Date(2016,4,24 ), y: -4 },
+//						{ x: new Date(2016,4,25 ), y: 10 }
+//					]
+//				}
+//				]
+//			};
+//	
+//			$("#totalSpent").CanvasJSChart(totalSpentOptions);
 		}
 	});
 	
@@ -389,10 +474,8 @@ $(document).ready(function(){
 				alert("You sure you buy something like this?");
 			} else {
 				totalMoneySpent = parseInt(response[0].total_money);
-				console.log(productPrice)
 				productPrice = parseInt(productPrice);
 				totalMoneySpent -= productPrice;
-				console.log(totalMoneySpent);
 				if (productPrice) {
 					increaseTotalMoney(totalMoneySpent, response);
 				}
@@ -412,6 +495,7 @@ $(document).ready(function(){
 
 	function attachHandlers(){		
 		$("#profile-dropdown").hide();
+		
 		
 		$( document ).ready(function() {
 			ReadCookie();
@@ -506,7 +590,6 @@ $(document).ready(function(){
 			catId = $('.show-category-name').attr("id");		
 			
 			_urlProduct = ENDPOINT+"products/"+productId;
-			console.log(_urlProduct);
 			var createPromise = $.ajax({
 				url: _urlProduct,
 				method: "GET",
@@ -515,12 +598,9 @@ $(document).ready(function(){
 				if (response == ""){
 					alert("There is nothing here!");
 				} else {
-					console.log(response);
 					totalMoney = response.product_price;
-					console.log("Product price: " + totalMoney);
 					getCatInfo(catId, totalMoney);
 				}
-				console.log(_urlProduct);
 				deleteProduct(_urlProduct, catId);
 			});	
 			

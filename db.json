@@ -51,138 +51,118 @@
   ],
   "categories": [
     {
-      "id": 1,
-      "cat_name": "Desserts",
-      "cat_slug": "desserts"
-    },
-    {
-      "cat_name": "Beer",
-      "icon_num": 4,
-      "user_id": 2,
-      "id": 2
-    },
-    {
-      "cat_name": "Work",
-      "icon_num": 19,
-      "user_id": 3,
-      "id": 15
-    },
-    {
-      "cat_name": "Calc",
-      "icon_num": 8,
-      "user_id": 3,
-      "id": 16
-    },
-    {
-      "cat_name": "Cakes",
+      "cat_name": "Chocolate",
       "icon_num": 7,
       "user_id": 3,
       "icon_back": "rgb(199, 59, 38)",
-      "id": 17
+      "total_money": 8,
+      "id": 1
+    },
+    {
+      "cat_name": "Meal",
+      "icon_num": 39,
+      "user_id": 3,
+      "icon_back": "rgb(1, 169, 140)",
+      "total_money": 18,
+      "id": 2
     },
     {
       "cat_name": "Beer",
       "icon_num": 4,
       "user_id": 3,
       "icon_back": "rgb(239, 200, 74)",
-      "id": 18
+      "total_money": 3,
+      "id": 3
     },
     {
-      "total_money": 5,
-      "id": 19
-    },
-    {
-      "{\"total_money\":7}": "",
-      "id": 20
-    },
-    {
-      "total_money": 400,
-      "id": 21
-    },
-    {
-      "cat_name": "Something",
-      "icon_num": 28,
+      "cat_name": "School",
+      "icon_num": 16,
       "user_id": 3,
-      "icon_back": "rgb(252, 185, 64)",
-      "total_money": 82,
-      "id": 22
+      "icon_back": "rgb(29, 131, 193)",
+      "total_money": 2,
+      "id": 4
+    },
+    {
+      "cat_name": "Electricity",
+      "icon_num": 24,
+      "user_id": 3,
+      "icon_back": "rgb(218, 94, 1)",
+      "total_money": 8,
+      "id": 5
+    },
+    {
+      "cat_name": "Shopping",
+      "icon_num": 21,
+      "user_id": 3,
+      "icon_back": "rgb(186, 76, 99)",
+      "total_money": 20,
+      "id": 6
     }
   ],
   "products": [
     {
-      "id": 1,
-      "cat_name": "Chocolate cake",
-      "cat_slug": "chocolate-cake",
-      "price": 5
+      "product_name": "Cake",
+      "product_price": 5,
+      "user_id": 3,
+      "cat_id": 1,
+      "date": "4/24/2016",
+      "id": 1
     },
     {
-      "product_price": 18,
+      "product_name": "Козунак",
+      "product_price": 3,
       "user_id": 3,
-      "cat_id": 5,
+      "cat_id": 1,
+      "date": "4/24/2016",
       "id": 2
     },
     {
-      "product_name": "Potatoes",
-      "product_price": 2.5,
+      "product_name": "Руло стефани",
+      "product_price": 6,
       "user_id": 3,
-      "cat_id": 5,
+      "cat_id": 2,
+      "date": "4/24/2016",
       "id": 3
     },
     {
-      "product_name": "Musaka",
-      "product_price": 3.5,
+      "product_name": "Кайсер",
+      "product_price": 3,
       "user_id": 3,
-      "cat_id": 5,
+      "cat_id": 3,
+      "date": "4/24/2016",
       "id": 4
     },
     {
-      "product_name": "Retro",
-      "product_price": 3,
+      "product_name": "Моливи",
+      "product_price": 2,
       "user_id": 3,
-      "cat_id": 19,
+      "cat_id": 4,
+      "date": "4/24/2016",
       "id": 5
     },
     {
-      "product_name": "ijnkm",
-      "product_price": 5,
+      "product_name": "Something else",
+      "product_price": 8,
       "user_id": 3,
-      "cat_id": 19,
+      "cat_id": 5,
+      "date": "4/24/2016",
       "id": 6
     },
     {
-      "product_name": "beer",
-      "product_price": 3,
+      "product_name": "Clothes",
+      "product_price": 20,
       "user_id": 3,
-      "cat_id": 18,
+      "cat_id": 6,
+      "date": "3/24/2016",
       "id": 7
     },
     {
-      "product_name": "beer",
-      "product_price": 4,
+      "product_name": "Burger King",
+      "product_price": 12,
       "user_id": 3,
-      "cat_id": 18,
+      "cat_id": 2,
+      "date": "4/24/2016 20:24",
       "id": 8
-    },
-    {
-      "product_name": "jn",
-      "product_price": 25,
-      "user_id": 3,
-      "cat_id": 18,
-      "id": 9
-    },
-    {
-      "product_name": "fmi",
-      "product_price": 400,
-      "user_id": 3,
-      "cat_id": 21,
-      "id": 10
-    },
-    {
-      "product_name": "ass",
-      "product_price": 50,
-      "user_id": 3,
-      "cat_id": 22,
-      "id": 22
     }
   ]
 }
